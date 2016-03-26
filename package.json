@@ -1,0 +1,12 @@
+{
+  "name": "homework-caseta",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "homework": ">=1.0.0",
+    "node": ">4.0.0"
+  },
+  "keywords": [
+    "homework-plugin",
+  ]
+}
