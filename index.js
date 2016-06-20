@@ -58,6 +58,15 @@ const caseta = {
     init: function(cfg, data, homework) {
         if (!cfg || !cfg.devices || !cfg.connection)
             return false;
+
+        var dimmerSchema = new homework.Device.Schema({
+            level: {
+                range: /[0-9]+,[0-9]+/,
+                readOnly: false
+            }
+        });
+        homework.registerDevice("Dimmer", dimmerSchema);
+
         homework.utils.onify(this);
         this._initOns();
         this._ready = false;
@@ -106,7 +115,7 @@ const caseta = {
             // if (typeof this._data === "object" && id in this._data)
             //     uuid = this._data[id];
             let func = functions[dev.type];
-            let hwdev = new this._homework.Device(func.hwtype, uuid);
+            let hwdev = new this._homework.Device(func.hwtype, { uuid: uuid });
             if (!hwdev.name)
                 hwdev.name = fullName(dev);
             let hwval = new this._homework.Device.Value("level", { values: { off: 0, on: 100 }, range: [0, 100] });
